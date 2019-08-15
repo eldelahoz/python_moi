@@ -38,7 +38,7 @@ print(ma_liste)
 
 mliste = [1, 2, 3]
 mliste2 = mliste
-mliste2.append(4) # Si on modifie l'objet depuis une des deux variable, le changement sera visible depuis les deux
+mliste2.append(4)  # Si on modifie l'objet depuis une des deux variable, le changement sera visible depuis les deux
 # variables, et comment on a utilise le methode append c'est une modification de l'objet
 print(mliste2)
 print(mliste, "\n")
@@ -47,14 +47,25 @@ print(mliste, "\n")
 mliste = [1, 2, 3]
 mliste2 = list(mliste)
 mliste2.append(4)
-print("On ajoute la methode list",mliste2, "\n")
+print("On ajoute la methode list", mliste2, "\n")
 print(mliste)
 
 # On va faire la meme chose me avec le dictionnaire
-mon_dic = {"Mon primier":1, "Mon deuxieme":2, "Mon troxieme":3}
+mon_dic = {"Mon primier": 1, "Mon deuxieme": 2, "Mon troxieme": 3}
 mon_dic2 = mon_dic
-mon_dic2.update({"Mon quatrieme":4})
+mon_dic2.update({"Mon quatrieme": 4})
 print(mon_dic2)
 print(mon_dic)
 
-#
+# Les variables globales
+i = 4
+
+
+def appell_i():
+    global i
+    i += 1
+
+
+print(i, "\n")
+appell_i()
+print(i)

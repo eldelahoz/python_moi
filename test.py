@@ -1,5 +1,3 @@
-from calculos.calculos_generales import dividir, potencia
+from calculos.basicos.operation import sumar
 
-dividir(10, 2)
-
-potencia(4, 6)
+sumar(2, 5)

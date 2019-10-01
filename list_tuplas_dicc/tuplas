@@ -1,0 +1,20 @@
+# Les tuples ils sont de liste mais qu'on peut pas modifie
+# Transforme une tuple en une liste
+mon_tupla = ("Juan", 13, 1, 1995)
+print(mon_tupla[1])
+mon_list = list(mon_tupla)
+print(mon_list)
+print("\n", "Transforme un eliste en une tuple")
+# Transforme une liste en une tuple
+mon_list2 = ["Andres", 21, 13, 12, 1997, 13]
+mon_tupla2 = tuple(mon_list2)
+print("Andres" in mon_tupla2)
+print(mon_tupla2.count(13))
+# Empaquetado de tupla
+mon_tupla3 = "Juan", 13, 1, 1995
+print(type(mon_tupla3), "\n", type(mon_tupla2), "\n", "Desempaquetado de tupla")
+prenom, jour, mois, anne = mon_tupla3
+print(prenom, "\n", type(prenom))
+print(jour, "\n", type(jour))
+print(mois, "\n", type(mois))
+print(anne, "\n", type(anne))

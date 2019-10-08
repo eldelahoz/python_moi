@@ -5,17 +5,72 @@ root.title("Mon Calculatrice")
 MonFrame = Frame(root, width=500, height=500)
 MonFrame.pack()
 
-NombreEcran = StringVar()
+# region Variables
+operation = ""
+Result = 0
+Reset_ecran = False
+# endregion
+
 
 # <editor-fold desc="Ecran">
+NombreEcran = StringVar()
 Ecran = Entry(MonFrame, textvariable=NombreEcran)
+NombreEcran.set("0")
+Ecran.focus()
 Ecran.grid(row=0, column=1, padx=10, pady=10, columnspan=4)
 Ecran.config(bg="black", fg="#03f943", justify="right")
 
 
 # </editor-fold>
+
+
 def NombrePul(nombre):
-    NombreEcran.set(NombreEcran.get() + nombre)
+    global operation, Result, Reset_ecran
+
+    if Ecran.get() == "0":
+        NombreEcran.set(nombre)
+    elif Reset_ecran:
+        NombreEcran.set(nombre)
+        Reset_ecran = False
+    else:
+        NombreEcran.set(NombreEcran.get() + nombre)
+
+
+def SuprEcran():
+    global operation
+    global Result
+    Ecran.delete(0, END)
+    NombreEcran.set("0")
+    Result = 0
+
+
+def SumEcran(num):
+    global operation, Result, Reset_ecran
+
+    Result += int(num)
+
+    operation = "suma"
+    Reset_ecran = True
+    NombreEcran.set(Result)
+
+
+def RestEcran(nomb):
+    global operation, Result, Reset_ecran
+    if Result == 0:
+        Result = int(nomb)
+    else:
+        Result -= int(nomb)
+    operation = "resta"
+    Reset_ecran = True
+    NombreEcran.set(Result)
+
+
+def Le_Result():
+    global operation
+    global Result
+    if operation == "suma":
+        NombreEcran.set(Result + int(NombreEcran.get()))
+        Result = 0
 
 
 # <editor-fold desc="File1">
@@ -47,7 +102,7 @@ Button2 = Button(MonFrame, text="2", width=3, command=lambda: NombrePul("2"))
 Button2.grid(row=4, column=2)
 Button3 = Button(MonFrame, text="3", width=3, command=lambda: NombrePul("3"))
 Button3.grid(row=4, column=3)
-ButtonRest = Button(MonFrame, text="-", width=3)
+ButtonRest = Button(MonFrame, text="-", width=3, command=lambda: RestEcran(NombreEcran.get()))
 ButtonRest.grid(row=4, column=4)
 # </editor-fold>
 
@@ -56,10 +111,13 @@ Button0 = Button(MonFrame, text="0", width=3, command=lambda: NombrePul("0"))
 Button0.grid(row=5, column=1)
 ButtonComa = Button(MonFrame, text=",", width=3, command=lambda: NombrePul(","))
 ButtonComa.grid(row=5, column=2)
-ButtonIgual = Button(MonFrame, text="=", width=3)
+ButtonIgual = Button(MonFrame, text="=", width=3, command=lambda: Le_Result())
 ButtonIgual.grid(row=5, column=3)
-ButtonSuma = Button(MonFrame, text="+", width=3)
+ButtonSuma = Button(MonFrame, text="+", width=3, command=lambda: SumEcran(NombreEcran.get()))
 ButtonSuma.grid(row=5, column=4)
 # </editor-fold>
+
+ButtonSup = Button(MonFrame, text="CE", width=3, command=lambda: SuprEcran())
+ButtonSup.grid(row=6, column=4)
 
 root.mainloop()

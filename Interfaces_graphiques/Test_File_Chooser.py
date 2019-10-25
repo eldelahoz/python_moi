@@ -5,7 +5,8 @@ root = Tk()
 
 
 def OuvrirFiche():
-    Ficher = filedialog.askopenfile(title="Ouvrir")
+    Ficher = filedialog.askopenfile(title="Ouvrir", initialdir="C:/",
+                                    filetypes=(("Format JPG", "*.jpg"), ("Format Excel", "*.xmls"), ("All Format", "*.*")))
 
     print(Ficher)
 

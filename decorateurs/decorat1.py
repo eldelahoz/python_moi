@@ -18,6 +18,7 @@ def function_derocateur(function_parametre):
 def suma(nombre1, nombre2, nombre3):
     print(nombre1 + nombre2 + nombre3)
 
+
 @function_derocateur
 def resta(nombre1, nombre2):
     print(nombre1 - nombre2)

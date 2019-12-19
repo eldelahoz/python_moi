@@ -17,3 +17,6 @@ class Labyrinthe:
             print(f"{i} et {value}")
             pass
         return f"{self.grille}"
+    
+
+

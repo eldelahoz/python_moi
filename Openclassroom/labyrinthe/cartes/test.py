@@ -55,17 +55,18 @@ class Carte:
             print(viste_labyrinthe, "\n")
         return self.labyrinthe
 
-    def o(self):
-        viste_labyrinthe = ""
-        position = self.labyrinthe.index("X")
-        if self.labyrinthe[position - 1] in self.obstacle:
-            print("Désole mais vous ne pouvez pas vous déplacer par là")
-        else:
-            self.labyrinthe[position - 1] = "X"
-            self.labyrinthe[position] = " "
-        for a in self.labyrinthe:
-            viste_labyrinthe += a
-        print(viste_labyrinthe)
+    def o(self, nombre=1):
+        for a in range(0, nombre):
+            viste_labyrinthe = ""
+            position = self.labyrinthe.index("X")
+            if self.labyrinthe[position - 1] in self.obstacle:
+                print("Désole mais vous ne pouvez pas vous déplacer par là")
+            else:
+                self.labyrinthe[position - 1] = "X"
+                self.labyrinthe[position] = " "
+            for a in self.labyrinthe:
+                viste_labyrinthe += a
+            print(viste_labyrinthe, "\n")
         return self.labyrinthe
 
 
@@ -85,26 +86,19 @@ if jouer:
     print(labyrinthe_c)
 
 
-def function_mouvement(mouvement):
-    if len(mouvement) > 1:
-        if mouvement[1] > "0":
-            return "labyrinthe_c." + mouvement + "(" + mouvement[1] + ")"
+while jouer:
 
-
-function_mouvement(input("Saissisez"))
-# while jouer:
-#
-#     b_jouer = input("Saissisez: ")
-#     if len(b_jouer) > 1:
-#         print(len(b_jouer))
-#         if b_jouer[1] > "0":
-#             labyrinthe_c.e(int(b_jouer[1]))
-#
-#     if b_jouer.lower() == "q":
-#         jouer = False
-#     elif b_jouer.lower() == "e":
-#         labyrinthe_c.e()
-#     elif b_jouer.lower() == "o":
-#         labyrinthe_c.o()
+    b_jouer = input("Saissisez: ")
+    if len(b_jouer) > 1:
+        if b_jouer[0] == "e":
+            labyrinthe_c.e(int(b_jouer[1]))
+        if b_jouer[0] == "o":
+            labyrinthe_c.o(int(b_jouer[1]))
+    if b_jouer.lower() == "e":
+        labyrinthe_c.e()
+    elif b_jouer.lower() == "o":
+        labyrinthe_c.o()
+    if b_jouer == "q":
+        break
 
 print("------Deuxime-------\n")

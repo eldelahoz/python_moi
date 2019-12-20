@@ -16,11 +16,12 @@ class Carte:
 
     def __init__(self, ficher):
         self.labyrinthe = []
+        self.obstacle = []
         with open(ficher, "r") as cartes:
-            ma_carte_on = cartes.read()
-
-        print(ma_carte_on)
-        for a in ma_carte_on:
+            self.ma_carte_on = cartes.read()
+        for a in self.ma_carte_on:
+            if a == "O":
+                self.obstacle.append(a)
             self.labyrinthe.append(a)
         # print(labyrinthe)
         # labyrinthe[labyrinthe.index("X")] = " "
@@ -30,27 +31,80 @@ class Carte:
         #     test += a
         # print(test)
 
-    def s(self, nombre):
-        test = ""
-        if self.labyrinthe[self.labyrinthe.index("X") + 11] == ".":
-            print("Vous pouvez vous deplace")
-            self.labyrinthe[self.labyrinthe.index("X") + 11] = "X"
-            self.labyrinthe[self.labyrinthe.index("X")] = " "
+    def __repr__(self):
+        return self.ma_carte_on
+
+    def Enregistre(self, value):
+        with open("partie_test.txt", "w") as carte_ouverte:
+            carte_ouverte.write(value)
+
+    def e(self, nombre=1):
+        for a in range(0, nombre):
+            viste_labyrinthe = ""
+            position = self.labyrinthe.index("X")
+            if self.labyrinthe[position + 1] in self.obstacle:
+                print("Désole mais vous ne pouvez pas vous déplacer par là")
+                break
+            else:
+                self.labyrinthe[position + 1] = "X"
+                self.labyrinthe[position] = " "
+            # print(self.labyrinthe[position + 1] in self.obstacle)
+            for a in self.labyrinthe:
+                viste_labyrinthe += a
+
+            print(viste_labyrinthe, "\n")
+        return self.labyrinthe
+
+    def o(self):
+        viste_labyrinthe = ""
+        position = self.labyrinthe.index("X")
+        if self.labyrinthe[position - 1] in self.obstacle:
+            print("Désole mais vous ne pouvez pas vous déplacer par là")
         else:
-            print(self.labyrinthe[self.labyrinthe.index("X") + 11])
-            pass
+            self.labyrinthe[position - 1] = "X"
+            self.labyrinthe[position] = " "
         for a in self.labyrinthe:
-            test += a
-        print(test)
+            viste_labyrinthe += a
+        print(viste_labyrinthe)
+        return self.labyrinthe
 
 
+jouer = False
+# Pour vérifier si le nombre que vous êtes entré est dans la liste
 try:
     if cartes[a_jouer - 1]:
         print("La carte existe")
-    labyrinthe_c = Carte(cartes[a_jouer - 1])
+
+        jouer = True
 
 except IndexError:
     print(f"Le nombre {a_jouer} ne correspond pas à aucun labyrinthes.")
 
+if jouer:
+    labyrinthe_c = Carte(cartes[a_jouer - 1])
+    print(labyrinthe_c)
+
+
+def function_mouvement(mouvement):
+    if len(mouvement) > 1:
+        if mouvement[1] > "0":
+            return "labyrinthe_c." + mouvement + "(" + mouvement[1] + ")"
+
+
+function_mouvement(input("Saissisez"))
+# while jouer:
+#
+#     b_jouer = input("Saissisez: ")
+#     if len(b_jouer) > 1:
+#         print(len(b_jouer))
+#         if b_jouer[1] > "0":
+#             labyrinthe_c.e(int(b_jouer[1]))
+#
+#     if b_jouer.lower() == "q":
+#         jouer = False
+#     elif b_jouer.lower() == "e":
+#         labyrinthe_c.e()
+#     elif b_jouer.lower() == "o":
+#         labyrinthe_c.o()
+
 print("------Deuxime-------\n")
-labyrinthe_c.s()

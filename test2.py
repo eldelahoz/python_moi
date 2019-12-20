@@ -1,5 +1,5 @@
-import shutil
-import os
+def e(nombre):
+    for a in range(0, nombre):
+        print(a)
 
-os.system("pscp.exe root@10.49.1.3:/var/sasa/mysql/produccion_* C:\Temps\BackupSII")
-password = "SugarSII003"
+e(2)
